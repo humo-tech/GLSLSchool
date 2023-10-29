@@ -67,4 +67,3 @@ onMounted(() => {
 <template>
   <canvas ref="canvas" id="canvas"></canvas>
 </template>
-, initCustomFormatter
