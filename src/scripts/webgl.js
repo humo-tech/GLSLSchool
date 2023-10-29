@@ -283,17 +283,17 @@ export class WebGLUtility {
     if (obj == null) {
       return
     }
-    if (obj.hasOwnProperty('framebuffer') === true && gl.isFramebuffer(obj.framebuffer) === true) {
+    if (obj && Object.prototype.hasOwnProperty.call(obj, 'framebuffer') === true && gl.isFramebuffer(obj.framebuffer) === true) {
       gl.bindFramebuffer(gl.FRAMEBUFFER, null)
       gl.deleteFramebuffer(obj.framebuffer)
       obj.framebuffer = null
     }
-    if (obj.hasOwnProperty('renderbuffer') === true && gl.isRenderbuffer(obj.renderbuffer) === true) {
+    if (obj && Object.prototype.hasOwnProperty.call(obj, 'renderbuffer') === true && gl.isRenderbuffer(obj.renderbuffer) === true) {
       gl.bindRenderbuffer(gl.RENDERBUFFER, null)
       gl.deleteRenderbuffer(obj.renderbuffer)
       obj.renderbuffer = null
     }
-    if (obj.hasOwnProperty('texture') === true && gl.isTexture(obj.texture) === true) {
+    if (obj && Object.prototype.hasOwnProperty.call(obj, 'texture') === true && gl.isTexture(obj.texture) === true) {
       gl.bindTexture(gl.TEXTURE_2D, null)
       gl.deleteTexture(obj.texture)
       obj.texture = null
