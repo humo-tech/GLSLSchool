@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap'
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://humo-tech.github.io/GLSLSchool/',
-  outDir: './docs',
+  site: 'https://humo-tech.github.io/',
+  base: '/GLSLSchool',
   integrations: [vue(), sitemap()],
 })
