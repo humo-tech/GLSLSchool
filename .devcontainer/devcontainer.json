@@ -4,12 +4,7 @@
   "workspaceFolder": "/app",
   "customizations": {
     "vscode": {
-      "extensions": [
-        "Vue.volar",
-        "esbenp.prettier-vscode",
-        "astro-build.astro-vscode",
-        "dbaeumer.vscode-eslint"
-      ]
+      "extensions": ["Vue.volar", "Vue.vscode-typescript-vue-plugin", "esbenp.prettier-vscode", "astro-build.astro-vscode", "dbaeumer.vscode-eslint"]
     }
   }
 }

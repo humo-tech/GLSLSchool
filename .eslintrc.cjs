@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['eslint:recommended', 'plugin:vue/vue3-essential'],
+  extends: ['standard', 'plugin:astro/recommended', 'plugin:vue/vue3-essential', 'prettier'],
   overrides: [
     {
       env: {
@@ -14,6 +14,14 @@ module.exports = {
         sourceType: 'script',
       },
     },
+    {
+      files: ['*.astro'],
+      parser: 'astro-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.astro'],
+      },
+    },
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -22,7 +30,6 @@ module.exports = {
   plugins: ['vue'],
   rules: {
     indent: ['error', 2],
-    'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'never'],
   },
