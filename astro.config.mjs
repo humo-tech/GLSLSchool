@@ -7,5 +7,8 @@ import sitemap from '@astrojs/sitemap'
 export default defineConfig({
   site: 'https://humo-tech.github.io/',
   base: '/GLSLSchool',
+  server: {
+    host: '0.0.0.0',
+  },
   integrations: [vue(), sitemap()],
 })
