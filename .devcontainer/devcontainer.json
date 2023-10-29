@@ -1,0 +1,15 @@
+{
+  "dockerComposeFile": "../docker-compose.yaml",
+  "service": "astro",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "Vue.volar",
+        "esbenp.prettier-vscode",
+        "astro-build.astro-vscode",
+        "dbaeumer.vscode-eslint"
+      ]
+    }
+  }
+}
