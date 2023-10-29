@@ -5,18 +5,19 @@ import vertexShaderSource from './shaders/vert.glsl?raw'
 import fragmentShaderSource from './shaders/frag.glsl?raw'
 const canvas = ref(null)
 
-const width = 800
-const height = 600
-
 let gl = null
 let shaderProgram = null
 const vbo = []
 let positions = []
 
-const load = () => {
-  canvas.value.width = width
-  canvas.value.height = height
+const init = () => {
+  canvas.value.width = window.innerWidth
+  canvas.value.height = window.innerHeight
 
+  window.addEventListener('resize', resize)
+}
+
+const load = () => {
   gl = canvas.value.getContext('webgl')
 
   shaderProgram = new ShaderProgram(gl, {
@@ -48,7 +49,15 @@ const render = () => {
   gl.drawArrays(gl.POINTS, 0, positions.length / 3)
 }
 
+const resize = () => {
+  canvas.value.width = window.innerWidth
+  canvas.value.height = window.innerHeight
+
+  render()
+}
+
 onMounted(() => {
+  init()
   load()
   setup()
   render()
@@ -58,10 +67,4 @@ onMounted(() => {
 <template>
   <canvas ref="canvas" id="canvas"></canvas>
 </template>
-
-<style>
-#canvas {
-  width: v-bind(width) px;
-  height: v-bind(height) px;
-}
-</style>
+, initCustomFormatter
