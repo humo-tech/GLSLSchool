@@ -3,7 +3,7 @@ module.exports = {
     browser: true,
     es2021: true,
   },
-  extends: ['eslint:recommended', 'plugin:vue/vue3-essential'],
+  extends: ['standard', 'plugin:astro/recommended', 'plugin:vue/vue3-essential', 'prettier'],
   overrides: [
     {
       env: {
@@ -12,6 +12,14 @@ module.exports = {
       files: ['.eslintrc.{js,cjs}'],
       parserOptions: {
         sourceType: 'script',
+      },
+    },
+    {
+      files: ['*.astro'],
+      parser: 'astro-eslint-parser',
+      parserOptions: {
+        parser: '@typescript-eslint/parser',
+        extraFileExtensions: ['.astro'],
       },
     },
   ],
