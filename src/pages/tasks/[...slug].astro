@@ -1,0 +1,20 @@
+---
+import Pages from '@/layouts/Pages.astro'
+import { getCollection } from 'astro:content'
+
+export const getStaticPaths = async () => {
+  const tasks = await getCollection('tasks')
+  return tasks.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }))
+}
+
+const { entry } = Astro.props
+const { Content } = await entry.render()
+console.log(entry)
+---
+
+<Pages title={entry.data.title} description={entry.data.description}>
+  <Content />
+</Pages>
