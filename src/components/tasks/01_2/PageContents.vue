@@ -50,16 +50,18 @@ const setupGeometry = () => {
 }
 
 const render = () => {
-  gl.viewport(0, 0, canvas.value.width, canvas.value.height)
-  gl.clear(gl.COLOR_BUFFER_BIT)
+  if (canvas.value) {
+    gl.viewport(0, 0, canvas.value.width, canvas.value.height)
+    gl.clear(gl.COLOR_BUFFER_BIT)
 
-  shaderProgram.use()
-  shaderProgram.setAttribute(vbo)
+    shaderProgram.use()
+    shaderProgram.setAttribute(vbo)
 
-  counter += 3
-  counter = counter % (positions.length / 3)
+    counter += 3
+    counter = counter % (positions.length / 3)
 
-  gl.drawArrays(gl.POINTS, 0, counter)
+    gl.drawArrays(gl.POINTS, 0, counter)
+  }
 
   requestAnimationFrame(render)
 }
