@@ -47,15 +47,14 @@ const setupGeometry = () => {
     }
   }
   vbo[0] = WebGLUtility.createVbo(gl, positions)
+  shaderProgram.use()
+  shaderProgram.setAttribute(vbo)
 }
 
 const render = () => {
   if (canvas.value) {
     gl.viewport(0, 0, canvas.value.width, canvas.value.height)
     gl.clear(gl.COLOR_BUFFER_BIT)
-
-    shaderProgram.use()
-    shaderProgram.setAttribute(vbo)
 
     counter += 3
     counter = counter % (positions.length / 3)
