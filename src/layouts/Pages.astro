@@ -1,9 +1,12 @@
 ---
+import Layout from '@/layouts/Layout.astro'
 import CommonHeader from '@/components/CommonHeader.vue'
 const { title, description } = Astro.props
 ---
 
-<CommonHeader title={title} description={description} />
-<main>
-  <slot />
-</main>
+<Layout title={title}>
+  <CommonHeader title={title} description={description} />
+  <main>
+    <slot />
+  </main>
+</Layout>
