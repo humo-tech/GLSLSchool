@@ -62,7 +62,7 @@ const load = () => {
   setMousePosition()
   canvas.value.addEventListener('mousemove', setMousePosition)
   canvas.value.addEventListener('touchmove', setMousePosition)
-  if (useMouseEnter) {
+  if (useMouseEnter || useMouseLeave) {
     canvas.value.addEventListener('mouseenter', () => {
       mouseEntered.value = true
     })
