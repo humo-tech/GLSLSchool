@@ -118,7 +118,7 @@ onMounted(async () => {
   <canvas ref="canvas" id="canvas"></canvas>
   <figure>
     <img :src="`${baseUrl}/tasks/01_3/halloween_chara1_pumpkin.png`" />
-    <figcaption><a href="https://www.irasutoya.com/2018/10/blog-post_890.html">いらすとや</a></figcaption>
+    <figcaption><a href="https://www.irasutoya.com/2018/10/blog-post_890.html" target="_blank" noopener>いらすとや</a></figcaption>
   </figure>
 </template>
 
