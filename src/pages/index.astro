@@ -4,6 +4,8 @@ import Layout from '@/layouts/Layout.astro'
 import Card from '@/components/Card.astro'
 import { SITE_TITLE } from '../consts'
 
+const baseUrl = import.meta.env.BASE_URL
+
 const tasks = await getCollection('tasks')
 ---
 
@@ -36,7 +38,7 @@ const tasks = await getCollection('tasks')
       </a>
     </p>
     <ul role="list" class="link-card-grid">
-      {tasks.map((entry) => <Card href={`tasks/${entry.slug}/`} title={entry.data.title} body={entry.data.description} />)}
+      {tasks.map((entry) => <Card href={`${baseUrl}/tasks/${entry.slug}/`} title={entry.data.title} body={entry.data.description} />)}
     </ul>
   </main>
 </Layout>

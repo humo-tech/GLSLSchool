@@ -38,11 +38,14 @@ defineProps({
 <style scoped>
 header {
   position: fixed;
+  z-index: 10;
   top: 0;
   left: 0;
   width: 100%;
   color: #fff;
   margin-bottom: 20px;
+  text-shadow: 2px 2px 0px #000;
+  background-color: #00000033;
 }
 nav {
   padding: 5px 15px 5px;
