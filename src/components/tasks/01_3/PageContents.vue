@@ -15,11 +15,18 @@ const colors = []
 const mousePos = [0.0, 0.0]
 const mouseEntered = ref(false)
 
+let useMouseEnter, useMouseLeave
+
 const init = () => {
   canvas.value.width = window.innerWidth
   canvas.value.height = window.innerHeight
 
   window.addEventListener('resize', resize)
+
+  const params = new URLSearchParams(location.search)
+  useMouseEnter = params.has('mouseenter')
+  useMouseLeave = params.has('mouseleave')
+  if (!useMouseEnter) mouseEntered.value = true
 }
 
 const setMousePosition = (event) => {
@@ -55,13 +62,22 @@ const load = () => {
   setMousePosition()
   canvas.value.addEventListener('mousemove', setMousePosition)
   canvas.value.addEventListener('touchmove', setMousePosition)
-  // mouse が最初に入ってくるまで悲しい表示になるので、その対応。false 時は flagを戻さない
-  canvas.value.addEventListener('mouseenter', () => {
-    mouseEntered.value = true
-  })
-  canvas.value.addEventListener('touchstart', () => {
-    mouseEntered.value = true
-  })
+  if (useMouseEnter) {
+    canvas.value.addEventListener('mouseenter', () => {
+      mouseEntered.value = true
+    })
+    canvas.value.addEventListener('touchstart', () => {
+      mouseEntered.value = true
+    })
+  }
+  if (useMouseLeave) {
+    canvas.value.addEventListener('mouseleave', () => {
+      mouseEntered.value = false
+    })
+    canvas.value.addEventListener('touchend', () => {
+      mouseEntered.value = false
+    })
+  }
 }
 
 watch(mouseEntered, (newValue) => {
