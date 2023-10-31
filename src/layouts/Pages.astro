@@ -4,7 +4,7 @@ import CommonHeader from '@/components/CommonHeader.vue'
 const { title, description } = Astro.props
 ---
 
-<Layout title={title}>
+<Layout title={title} description={description}>
   <CommonHeader title={title} description={description} />
   <main>
     <slot />
