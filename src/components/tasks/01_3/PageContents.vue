@@ -23,8 +23,16 @@ const init = () => {
 
 const setMousePosition = (event) => {
   if (event) {
-    mousePos[0] = (event.clientX / canvas.value.width) * 2 - 1.0
-    mousePos[1] = -((event.clientY / canvas.value.height) * 2 - 1.0)
+    let x, y
+    if (event.changedTouches) {
+      x = event.changedTouches[0].clientX
+      y = event.changedTouches[0].clientY
+    } else {
+      x = event.clientX
+      y = event.clientY
+    }
+    mousePos[0] = (x / canvas.value.width) * 2 - 1.0
+    mousePos[1] = -((y / canvas.value.height) * 2 - 1.0)
   }
 
   shaderProgram.use()
@@ -45,6 +53,7 @@ const load = () => {
 
   setMousePosition()
   canvas.value.addEventListener('mousemove', setMousePosition)
+  canvas.value.addEventListener('touchmove', setMousePosition)
 }
 
 const setup = async () => {
