@@ -55,17 +55,12 @@ const load = () => {
   setMousePosition()
   canvas.value.addEventListener('mousemove', setMousePosition)
   canvas.value.addEventListener('touchmove', setMousePosition)
+  // mouse が最初に入ってくるまで悲しい表示になるので、その対応。false 時は flagを戻さない
   canvas.value.addEventListener('mouseenter', () => {
     mouseEntered.value = true
   })
-  canvas.value.addEventListener('mouseleave', () => {
-    mouseEntered.value = false
-  })
   canvas.value.addEventListener('touchstart', () => {
     mouseEntered.value = true
-  })
-  canvas.value.addEventListener('touchend', () => {
-    mouseEntered.value = false
   })
 }
 
