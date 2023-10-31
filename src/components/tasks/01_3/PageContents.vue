@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import { WebGLUtility, ShaderProgram } from '@/scripts/webgl.js'
 import vertexShaderSource from './shaders/vert.glsl?raw'
 import fragmentShaderSource from './shaders/frag.glsl?raw'
@@ -13,6 +13,7 @@ const vbo = []
 const positions = []
 const colors = []
 const mousePos = [0.0, 0.0]
+const mouseEntered = ref(false)
 
 const init = () => {
   canvas.value.width = window.innerWidth
@@ -23,12 +24,20 @@ const init = () => {
 
 const setMousePosition = (event) => {
   if (event) {
-    mousePos[0] = (event.clientX / canvas.value.width) * 2 - 1.0
-    mousePos[1] = -((event.clientY / canvas.value.height) * 2 - 1.0)
+    let x, y
+    if (event.changedTouches) {
+      x = event.changedTouches[0].clientX
+      y = event.changedTouches[0].clientY
+    } else {
+      x = event.clientX
+      y = event.clientY
+    }
+    mousePos[0] = (x / canvas.value.width) * 2 - 1.0
+    mousePos[1] = -((y / canvas.value.height) * 2 - 1.0)
   }
 
   shaderProgram.use()
-  shaderProgram.setUniform([mousePos])
+  shaderProgram.setUniform([mousePos, mouseEntered.value])
 }
 
 const load = () => {
@@ -39,13 +48,31 @@ const load = () => {
     fragmentShaderSource,
     attribute: ['position', 'color'],
     stride: [2, 4],
-    uniform: ['mousePos'],
-    type: ['uniform2fv'],
+    uniform: ['mousePos', 'mouseEntered'],
+    type: ['uniform2fv', 'uniform1i'],
   })
 
   setMousePosition()
   canvas.value.addEventListener('mousemove', setMousePosition)
+  canvas.value.addEventListener('touchmove', setMousePosition)
+  canvas.value.addEventListener('mouseenter', () => {
+    mouseEntered.value = true
+  })
+  canvas.value.addEventListener('mouseleave', () => {
+    mouseEntered.value = false
+  })
+  canvas.value.addEventListener('touchstart', () => {
+    mouseEntered.value = true
+  })
+  canvas.value.addEventListener('touchend', () => {
+    mouseEntered.value = false
+  })
 }
+
+watch(mouseEntered, (newValue) => {
+  shaderProgram.use()
+  shaderProgram.setUniform([mousePos, mouseEntered.value])
+})
 
 const setup = async () => {
   await setupGeometry()
